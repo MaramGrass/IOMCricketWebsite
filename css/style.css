@@ -209,14 +209,17 @@ nav {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--green) 0%, #0a0a0a 50%, var(--dark) 100%);
+  background-image: url('../images/Stock 2.jpg');
+  background-size: cover;
+  background-position: center 40%;
 }
 
 .hero-pattern {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 20% 80%, rgba(196,30,46,0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(196,30,46,0.2) 0%, transparent 50%);
+  background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.65) 45%, rgba(0,0,0,0.45) 100%),
+    radial-gradient(circle at 20% 80%, rgba(196,30,46,0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(196,30,46,0.15) 0%, transparent 50%);
 }
 
 .hero-content {
@@ -410,6 +413,8 @@ nav {
 .news-card-img {
   height: 130px;
   background: linear-gradient(135deg, var(--red), #8B0000);
+  background-size: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -529,6 +534,8 @@ nav {
 .page-hero {
   padding-top: var(--nav-height);
   background: linear-gradient(135deg, var(--green) 0%, #0a0a0a 100%);
+  background-size: cover;
+  background-position: center;
   padding-bottom: 36px;
   position: relative;
   overflow: hidden;
@@ -538,7 +545,8 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 80% 50%, rgba(196,30,46,0.12) 0%, transparent 60%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.55) 100%),
+    radial-gradient(circle at 80% 50%, rgba(196,30,46,0.15) 0%, transparent 60%);
 }
 
 .page-hero-content {
