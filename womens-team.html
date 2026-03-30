@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Women's National Team — Isle of Man Cricket</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Isle of Man Cricket Association">
+    <div class="nav-logo-text">
+      <span class="org">Isle of Man</span>
+      <span class="country">Cricket Association</span>
+    </div>
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li>
+      <span>About <span class="nav-caret">▾</span></span>
+      <ul class="nav-dropdown">
+        <li><a href="about.html">About IOMCA</a></li>
+        <li><a href="about.html#committees">Committees</a></li>
+        <li><a href="about.html#policies">Welfare & Policies</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </li>
+    <li><a href="news.html">News</a></li>
+    <li>
+      <span class="active">National Teams <span class="nav-caret">▾</span></span>
+      <ul class="nav-dropdown">
+        <li><a href="mens-team.html">Men's National Team</a></li>
+        <li><a href="womens-team.html">Women's National Team</a></li>
+        <li><a href="academy.html">Academy & EPP</a></li>
+        <li><a href="roll-of-honour.html">Roll of Honour</a></li>
+      </ul>
+    </li>
+    <li>
+      <span>Domestic Cricket <span class="nav-caret">▾</span></span>
+      <ul class="nav-dropdown">
+        <li><a href="domestic.html">Overview</a></li>
+        <li><a href="domestic.html#leagues">Leagues & Competitions</a></li>
+        <li><a href="domestic.html#clubs">Clubs</a></li>
+        <li><a href="domestic.html#junior">Junior Cricket</a></li>
+      </ul>
+    </li>
+    <li><a href="women-girls.html">Women & Girls</a></li>
+    <li>
+      <span>Get Involved <span class="nav-caret">▾</span></span>
+      <ul class="nav-dropdown">
+        <li><a href="get-involved.html">Play Cricket</a></li>
+        <li><a href="get-involved.html#coaching">Coaching</a></li>
+        <li><a href="get-involved.html#umpiring">Umpiring & Scoring</a></li>
+        <li><a href="get-involved.html#schools">Schools</a></li>
+        <li><a href="get-involved.html#community">Community</a></li>
+      </ul>
+    </li>
+    <li><a href="https://www.iomcricket.co.uk/store/c1/Featured_Products.html" class="nav-store-btn" target="_blank">🛒 Shop</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO — red accent for women's team -->
+<div class="page-hero" style="background:linear-gradient(135deg,#8B0000 0%,var(--red) 50%,#5c0011 100%);">
+  <div class="page-hero-content">
+    <div class="page-hero-label">National Squad</div>
+    <h1>Women's National Team</h1>
+    <p>Growing the game and competing with pride — the Isle of Man Women's XI on the European and international stage.</p>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="index.html">Home</a><span>›</span>
+  <a href="#">National Teams</a><span>›</span>
+  Women's National Team
+</div>
+
+<!-- TABS -->
+<div class="section" style="padding-top:32px">
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('squad')">Squad</button>
+    <button class="tab-btn" onclick="switchTab('results')">Recent Results</button>
+    <button class="tab-btn" onclick="switchTab('fixtures')">Fixtures</button>
+  </div>
+
+  <!-- SQUAD TAB -->
+  <div class="tab-panel active" id="tab-squad">
+
+    <div style="margin-bottom:28px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div style="font-size:14px;color:var(--mid-grey)">Filter by role:</div>
+      <button class="filter-btn active-filter" onclick="filterPlayers('all', event)">All</button>
+      <button class="filter-btn" onclick="filterPlayers('Batsman', event)">Batsmen</button>
+      <button class="filter-btn" onclick="filterPlayers('Bowler', event)">Bowlers</button>
+      <button class="filter-btn" onclick="filterPlayers('All-rounder', event)">All-rounders</button>
+      <button class="filter-btn" onclick="filterPlayers('Wicket-keeper', event)">Wicket-keepers</button>
+    </div>
+
+    <div class="players-grid" id="players-grid"></div>
+
+  </div>
+
+  <!-- RESULTS TAB -->
+  <div class="tab-panel" id="tab-results">
+    <div style="text-align:center;padding:48px;color:var(--mid-grey)">
+      <div style="font-size:48px;margin-bottom:16px">🏏</div>
+      <div style="font-size:16px;font-weight:500">Recent results will appear here</div>
+      <div style="font-size:14px;margin-top:8px">Check back during the season for match updates.</div>
+    </div>
+  </div>
+
+  <!-- FIXTURES TAB -->
+  <div class="tab-panel" id="tab-fixtures">
+    <div style="text-align:center;padding:48px;color:var(--mid-grey)">
+      <div style="font-size:48px;margin-bottom:16px">📅</div>
+      <div style="font-size:16px;font-weight:500">Fixtures will be published here</div>
+      <div style="font-size:14px;margin-top:8px">Full fixture list coming soon.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal" id="player-modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-header" style="background:linear-gradient(135deg,#8B0000,var(--red))">
+      <div class="modal-avatar" id="modal-avatar"></div>
+      <div class="modal-header-text">
+        <h2 id="modal-name"></h2>
+        <div class="role" id="modal-role"></div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-stats" id="modal-stats"></div>
+      <p class="modal-bio" id="modal-bio"></p>
+      <div class="modal-tags" id="modal-tags"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Isle of Man Cricket Association">
+      <p>The Isle of Man Cricket Association is the governing body for cricket on the Isle of Man, affiliated with the ICC and Cricket Europe.</p>
+      <div class="footer-socials" style="margin-top:16px">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">𝕏</a>
+        <a href="#" title="Instagram">◎</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="mens-team.html">Men's Team</a></li>
+        <li><a href="womens-team.html">Women's Team</a></li>
+        <li><a href="domestic.html">Domestic Cricket</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Women's Cricket</h4>
+      <ul>
+        <li><a href="women-girls.html">Women & Girls</a></li>
+        <li><a href="women-girls.html#softballs">Soft Ball Cricket</a></li>
+        <li><a href="women-girls.html#hardball">Hard Ball Cricket</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Policies</h4>
+      <ul>
+        <li><a href="about.html#policies">Welfare & Policies</a></li>
+        <li><a href="about.html#privacy">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Isle of Man Cricket Association. All rights reserved.</span>
+    <span>Member of ICC & Cricket Europe</span>
+  </div>
+</footer>
+
+<style>
+  .filter-btn {
+    padding: 6px 14px;
+    border: 1.5px solid var(--light-grey);
+    border-radius: 100px;
+    background: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--mid-grey);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { border-color: var(--red); color: var(--red); }
+  .filter-btn.active-filter { background: var(--red); border-color: var(--red); color: var(--white); }
+  .player-avatar { background: linear-gradient(160deg,#8B0000 0%,var(--red) 100%) !important; }
+  .modal-stat .val { color: var(--red) !important; }
+</style>
+
+<script>
+  const players = [
+    { id: 1, name: 'Lucy Barnett', initials: 'LB', role: 'Batsman', batting: 'Right-hand', bowling: 'Right-arm medium', club: 'Cronkbourne', caps: 18, bio: 'Lucy Barnett is one of the most experienced players in the Women\'s squad, providing crucial experience and consistency at the top of the order.', tags: ['Right-hand bat', 'Opening batsman', 'Cronkbourne CC'] },
+    { id: 2, name: 'Kim Carney', initials: 'KC', role: 'All-rounder', batting: 'Right-hand', bowling: 'Right-arm medium', club: 'Castletown', caps: 22, bio: 'A key all-rounder in the Women\'s set-up, Kim Carney leads by example with both bat and ball and is a vital cog in the team\'s engine room.', tags: ['Right-hand bat', 'Medium-pace', 'Castletown CC'] },
+    { id: 3, name: 'Ellan Cleator', initials: 'EC', role: 'Batsman', batting: 'Left-hand', bowling: 'Right-arm medium', club: 'Finch Hill', caps: 14, bio: 'Ellan Cleator is an elegant left-handed batsman who plays with great composure and has the technique to succeed at international level.', tags: ['Left-hand bat', 'Middle order', 'Finch Hill CC'] },
+    { id: 4, name: 'Clare Crowe', initials: 'CC', role: 'Bowler', batting: 'Right-hand', bowling: 'Right-arm off-spin', club: 'Ramsey', caps: 27, bio: 'Clare Crowe is one of the most experienced bowlers in the squad. Her off-spin is difficult to score against and she is a reliable wicket-taker.', tags: ['Off-spin bowler', 'Tail-ender', 'Ramsey CC'] },
+    { id: 5, name: 'Georgie Ford', initials: 'GF', role: 'Wicket-keeper', batting: 'Right-hand', bowling: '—', club: 'Cronkbourne', caps: 19, bio: 'Georgie Ford is a dependable wicket-keeper and useful lower-order batsman who has been a key member of the Women\'s squad for several seasons.', tags: ['Wicket-keeper', 'Right-hand bat', 'Cronkbourne CC'] },
+    { id: 6, name: 'Amelia Griffiths', initials: 'AG', role: 'All-rounder', batting: 'Right-hand', bowling: 'Right-arm medium', club: 'Castletown', caps: 11, bio: 'Amelia Griffiths is a promising all-round talent who contributes regularly with both bat and ball. An exciting prospect for the future.', tags: ['Right-hand bat', 'Medium-pace', 'Castletown CC'] },
+    { id: 7, name: 'Sam Hassall', initials: 'SH', role: 'Batsman', batting: 'Right-hand', bowling: 'Right-arm medium', club: 'Finch Hill', caps: 8, bio: 'Sam Hassall is a hard-working batsman who grafts for every run. Her determination and work ethic make her a valuable squad member.', tags: ['Right-hand bat', 'Middle order', 'Finch Hill CC'] },
+    { id: 8, name: 'Caitlin Henery', initials: 'CH', role: 'Bowler', batting: 'Right-hand', bowling: 'Right-arm fast-medium', club: 'Cronkbourne', caps: 16, bio: 'Caitlin Henery is the pace spearhead of the Women\'s bowling attack. Her ability to generate sharp pace is a real asset for the team.', tags: ['Fast-medium bowler', 'Lower order', 'Cronkbourne CC'] },
+    { id: 9, name: 'Jo Hicks', initials: 'JH', role: 'All-rounder', batting: 'Right-hand', bowling: 'Right-arm medium', club: 'Ramsey', caps: 30, bio: 'The most experienced player in the squad, Jo Hicks has been a cornerstone of Isle of Man Women\'s cricket for over a decade. An inspirational figure.', tags: ['Right-hand bat', 'All-rounder', 'Ramsey CC'] },
+    { id: 10, name: 'Lola Hornby-Wheeler', initials: 'LH', role: 'Batsman', batting: 'Left-hand', bowling: 'Right-arm medium', club: 'Finch Hill', caps: 5, bio: 'Lola Hornby-Wheeler is an exciting young talent who bats left-handed with flair and aggression. A player to watch in the coming seasons.', tags: ['Left-hand bat', 'Top order', 'Finch Hill CC'] },
+    { id: 11, name: 'Zara Levy', initials: 'ZL', role: 'Bowler', batting: 'Right-hand', bowling: 'Left-arm spin', club: 'Castletown', caps: 9, bio: 'Zara Levy is an intelligent left-arm spinner whose control and variations make her difficult to score against. She extracts significant turn in helpful conditions.', tags: ['Left-arm spin', 'Lower order', 'Castletown CC'] },
+    { id: 12, name: 'Libby Moore', initials: 'LM', role: 'Batsman', batting: 'Right-hand', bowling: 'Right-arm medium', club: 'Cronkbourne', caps: 12, bio: 'Libby Moore is a stylish top-order batsman who plays attractively when in form. She has shown considerable potential at international level.', tags: ['Right-hand bat', 'Opening batsman', 'Cronkbourne CC'] },
+    { id: 13, name: 'Danielle Murphy', initials: 'DM', role: 'All-rounder', batting: 'Right-hand', bowling: 'Right-arm off-spin', club: 'Ramsey', caps: 15, bio: 'Danielle Murphy is a consistent performer who contributes with both bat and ball. Her off-spin is a reliable weapon in the team\'s arsenal.', tags: ['Right-hand bat', 'Off-spin', 'Ramsey CC'] },
+    { id: 14, name: 'Rachel Overman', initials: 'RO', role: 'Bowler', batting: 'Right-hand', bowling: 'Right-arm medium', club: 'Finch Hill', caps: 21, bio: 'Rachel Overman is an experienced medium-pace bowler who generates movement and hits the right areas consistently. A reliable performer at international level.', tags: ['Right-arm medium', 'Tail-ender', 'Finch Hill CC'] },
+    { id: 15, name: 'Catherine Perry', initials: 'CP', role: 'Batsman', batting: 'Right-hand', bowling: 'Right-arm medium', club: 'Castletown', caps: 6, bio: 'Catherine Perry is an emerging middle-order talent who has made an impressive start to her international career with her calm approach.', tags: ['Right-hand bat', 'Middle order', 'Castletown CC'] },
+    { id: 16, name: 'Jasmin Pullen', initials: 'JP', role: 'Wicket-keeper', batting: 'Right-hand', bowling: '—', club: 'Cronkbourne', caps: 13, bio: 'Jasmin Pullen is a capable wicket-keeper batsman who contributes with the gloves and down the order with the bat. A reliable squad member.', tags: ['Wicket-keeper', 'Right-hand bat', 'Cronkbourne CC'] },
+    { id: 17, name: 'Alanya Thorpe', initials: 'AT', role: 'All-rounder', batting: 'Left-hand', bowling: 'Left-arm medium', club: 'Ramsey', caps: 7, bio: 'Alanya Thorpe is a dynamic left-handed all-rounder who offers the team genuine variety with both bat and ball. A valuable asset to the squad.', tags: ['Left-hand bat', 'Left-arm medium', 'Ramsey CC'] },
+    { id: 18, name: 'Bekkie Webster', initials: 'BW', role: 'Batsman', batting: 'Right-hand', bowling: 'Right-arm medium', club: 'Finch Hill', caps: 10, bio: 'Bekkie Webster is a determined middle-order batsman who plays without fear. She builds innings steadily and can accelerate when the situation demands.', tags: ['Right-hand bat', 'Middle order', 'Finch Hill CC'] },
+  ];
+
+  let currentFilter = 'all';
+
+  function renderPlayers(filter) {
+    const grid = document.getElementById('players-grid');
+    const filtered = filter === 'all' ? players : players.filter(p => p.role === filter);
+    grid.innerHTML = filtered.map((p, i) => `
+      <div class="player-card" onclick="openModal(${p.id})" style="animation-delay:${i * 0.03}s">
+        <div class="player-avatar">
+          <span class="initials">${p.initials}</span>
+          <span class="number">${p.id}</span>
+        </div>
+        <div class="player-info">
+          <div class="name">${p.name}</div>
+          <div class="role">${p.role}</div>
+          <div class="view-profile" style="color:var(--red)">View profile →</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function filterPlayers(role, e) {
+    currentFilter = role;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active-filter'));
+    e.target.classList.add('active-filter');
+    renderPlayers(role);
+  }
+
+  function openModal(id) {
+    const p = players.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('modal-avatar').textContent = p.initials;
+    document.getElementById('modal-name').textContent = p.name;
+    document.getElementById('modal-role').textContent = p.role + ' · Isle of Man Women';
+    document.getElementById('modal-stats').innerHTML = `
+      <div class="modal-stat"><div class="val">${p.caps}</div><div class="lbl">Caps</div></div>
+      <div class="modal-stat"><div class="val">${p.batting.split('-')[0]}</div><div class="lbl">Batting hand</div></div>
+      <div class="modal-stat"><div class="val">${p.bowling !== '—' ? p.bowling.split(' ').slice(-1)[0] : '—'}</div><div class="lbl">Bowling</div></div>
+    `;
+    document.getElementById('modal-bio').textContent = p.bio;
+    document.getElementById('modal-tags').innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+    document.getElementById('modal-overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOnOverlay(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  function switchTab(id) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelector(`[onclick="switchTab('${id}')"]`).classList.add('active');
+    document.getElementById('tab-' + id).classList.add('active');
+  }
+
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('nav-links').classList.toggle('open');
+  });
+
+  renderPlayers('all');
+</script>
+</body>
+</html>
