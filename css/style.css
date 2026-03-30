@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&display=swap');
 
 :root {
   --white: #ffffff;
@@ -6,11 +6,11 @@
   --light-grey: #e8e6e1;
   --mid-grey: #9a9590;
   --dark: #1a1a1a;
-  --green: #2d5a27;
-  --green-light: #3d7a35;
+  --green: #1a1a1a;
+  --green-light: #2d2d2d;
   --red: #c41e2e;
   --red-light: #e02035;
-  --gold: #d4a017;
+  --gold: #c41e2e;
   --nav-height: 80px;
 }
 
@@ -19,7 +19,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-weight: 400;
   color: var(--dark);
   background: var(--off-white);
@@ -61,7 +61,7 @@ nav {
 }
 
 .nav-logo-text .org {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 13px;
   font-weight: 700;
   color: var(--green);
@@ -70,7 +70,7 @@ nav {
 }
 
 .nav-logo-text .country {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 11px;
   font-weight: 500;
   color: var(--mid-grey);
@@ -208,13 +208,13 @@ nav {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--green) 0%, #1a3a16 50%, var(--dark) 100%);
+  background: linear-gradient(135deg, var(--green) 0%, #0a0a0a 50%, var(--dark) 100%);
 }
 
 .hero-pattern {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 20% 80%, rgba(212,160,23,0.15) 0%, transparent 50%),
+  background-image: radial-gradient(circle at 20% 80%, rgba(196,30,46,0.15) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(196,30,46,0.2) 0%, transparent 50%);
 }
 
@@ -231,7 +231,7 @@ nav {
 }
 
 .hero-text h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(42px, 6vw, 80px);
   font-weight: 900;
   color: var(--white);
@@ -261,10 +261,10 @@ nav {
 .btn-primary {
   padding: 14px 28px;
   background: var(--gold);
-  color: var(--dark);
+  color: var(--white);
   border: none;
   border-radius: 6px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
@@ -276,7 +276,7 @@ nav {
   gap: 8px;
 }
 
-.btn-primary:hover { background: #e6b020; transform: translateY(-1px); }
+.btn-primary:hover { background: var(--red-light); transform: translateY(-1px); }
 
 .btn-outline {
   padding: 14px 28px;
@@ -284,7 +284,7 @@ nav {
   color: var(--white);
   border: 1.5px solid rgba(255,255,255,0.4);
   border-radius: 6px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
@@ -372,7 +372,7 @@ nav {
 }
 
 .section-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(28px, 4vw, 44px);
   font-weight: 700;
   color: var(--dark);
@@ -408,7 +408,7 @@ nav {
 
 .news-card-img {
   height: 180px;
-  background: linear-gradient(135deg, var(--green), var(--green-light));
+  background: linear-gradient(135deg, var(--red), #8B0000);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -430,7 +430,7 @@ nav {
 }
 
 .news-card-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 18px;
   font-weight: 700;
   color: var(--dark);
@@ -459,10 +459,10 @@ nav {
 }
 
 .stat-item .number {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 52px;
   font-weight: 900;
-  color: var(--gold);
+  color: var(--white);
   line-height: 1;
 }
 
@@ -503,7 +503,7 @@ nav {
 }
 
 .card-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 18px;
   font-weight: 700;
   color: var(--dark);
@@ -527,7 +527,7 @@ nav {
 /* ── PAGE HERO (inner pages) ── */
 .page-hero {
   padding-top: var(--nav-height);
-  background: linear-gradient(135deg, var(--green) 0%, #1a3a16 100%);
+  background: linear-gradient(135deg, var(--green) 0%, #0a0a0a 100%);
   padding-bottom: 60px;
   position: relative;
   overflow: hidden;
@@ -537,7 +537,7 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 80% 50%, rgba(212,160,23,0.12) 0%, transparent 60%);
+  background-image: radial-gradient(circle at 80% 50%, rgba(196,30,46,0.12) 0%, transparent 60%);
 }
 
 .page-hero-content {
@@ -559,7 +559,7 @@ nav {
 }
 
 .page-hero h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(32px, 5vw, 60px);
   font-weight: 900;
   color: var(--white);
@@ -598,7 +598,7 @@ nav {
 
 .player-avatar {
   height: 180px;
-  background: linear-gradient(160deg, var(--green) 0%, #1a3a16 100%);
+  background: linear-gradient(160deg, var(--green) 0%, #0a0a0a 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -607,7 +607,7 @@ nav {
 }
 
 .player-avatar .initials {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 48px;
   font-weight: 700;
   color: rgba(255,255,255,0.25);
@@ -617,7 +617,7 @@ nav {
   position: absolute;
   bottom: 10px;
   right: 12px;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 40px;
   font-weight: 900;
   color: rgba(255,255,255,0.12);
@@ -628,7 +628,7 @@ nav {
 }
 
 .player-info .name {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 16px;
   font-weight: 700;
   color: var(--dark);
@@ -687,7 +687,7 @@ nav {
 }
 
 .modal-header {
-  background: linear-gradient(135deg, var(--green), #1a3a16);
+  background: linear-gradient(135deg, var(--green), #0a0a0a);
   padding: 40px;
   display: flex;
   gap: 24px;
@@ -723,7 +723,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 28px;
   font-weight: 700;
   color: var(--white);
@@ -732,7 +732,7 @@ nav {
 }
 
 .modal-header-text h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 26px;
   font-weight: 700;
   color: var(--white);
@@ -766,7 +766,7 @@ nav {
 }
 
 .modal-stat .val {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 22px;
   font-weight: 700;
   color: var(--green);
@@ -813,7 +813,7 @@ nav {
 
 .tab-btn {
   padding: 10px 20px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 14px;
   font-weight: 500;
   color: var(--mid-grey);
@@ -991,7 +991,7 @@ footer {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--green), var(--green-light));
+  background: linear-gradient(135deg, var(--red), #8B0000);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1034,7 +1034,7 @@ footer {
   padding: 12px 14px;
   border: 1.5px solid var(--light-grey);
   border-radius: 8px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 14px;
   color: var(--dark);
   background: var(--white);
@@ -1056,7 +1056,7 @@ footer {
   color: var(--white);
   border: none;
   border-radius: 8px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
