@@ -78,9 +78,6 @@
 <a href="news.html" class="btn-outline">Latest News →</a>
 </div>
 </div>
-<div class="hero-logo-large">
-<img src="images/logo.png" alt="Isle of Man Cricket">
-</div>
 </div>
 </section>
 
@@ -204,6 +201,44 @@
 </div>
 </div>
 
+<!-- CALENDAR -->
+<div style="background:var(--off-white);padding:80px 0;" id="events">
+<div class="section" style="padding-top:0;padding-bottom:0">
+<div class="section-header">
+<div class="section-label">What's On</div>
+<h2 class="section-title">Events <em>Calendar</em></h2>
+</div>
+<div class="cal-filters">
+<button class="cal-filter active" data-filter="all">All Events</button>
+<button class="cal-filter" data-filter="match">Matches</button>
+<button class="cal-filter" data-filter="committee">Committee</button>
+<button class="cal-filter" data-filter="school">School Visits</button>
+</div>
+<div class="cal-wrapper">
+<div class="cal-nav">
+<button class="cal-nav-btn" id="cal-prev">&#8592;</button>
+<h3 class="cal-month-title" id="cal-month-title"></h3>
+<button class="cal-nav-btn" id="cal-next">&#8594;</button>
+</div>
+<div class="cal-dow-row">
+<div class="cal-dow">Mon</div>
+<div class="cal-dow">Tue</div>
+<div class="cal-dow">Wed</div>
+<div class="cal-dow">Thu</div>
+<div class="cal-dow">Fri</div>
+<div class="cal-dow">Sat</div>
+<div class="cal-dow">Sun</div>
+</div>
+<div class="cal-days" id="cal-days"></div>
+</div>
+<div class="cal-legend">
+<span class="cal-legend-item match">Matches</span>
+<span class="cal-legend-item committee">Committee</span>
+<span class="cal-legend-item school">School Visits</span>
+</div>
+</div>
+</div>
+
 <!-- CTA BANNER -->
 <div style="background:linear-gradient(135deg,rgba(150,10,20,0.85),rgba(80,0,10,0.9)),url('images/Stock 3 Stadium.jpg');background-size:cover;background-position:center;padding:64px 40px;text-align:center">
 <div style="max-width:600px;margin:0 auto">
@@ -264,9 +299,106 @@
 </footer>
 
 <script>
-  document.getElementById('hamburger').addEventListener('click', () =>{
+  document.getElementById('hamburger').addEventListener('click', function() {
     document.getElementById('nav-links').classList.toggle('open');
   });
+
+  // ── CALENDAR ──
+  (function() {
+    var EVENTS = [
+      // April 2026
+      { date: '2026-04-05', type: 'match',     title: 'IOM vs Jersey',          time: '11:00', detail: 'Home · National Ground' },
+      { date: '2026-04-08', type: 'committee', title: 'Board Meeting',           time: '18:30', detail: 'IOMCA Offices' },
+      { date: '2026-04-12', type: 'match',     title: 'IOM vs Guernsey',         time: '11:00', detail: 'Away · Guernsey' },
+      { date: '2026-04-15', type: 'school',    title: 'School Visit',            time: '09:30', detail: 'Ballakermeen High' },
+      { date: '2026-04-19', type: 'match',     title: 'Women vs Scotland',       time: '11:00', detail: 'Home · National Ground' },
+      { date: '2026-04-22', type: 'school',    title: 'School Visit',            time: '10:00', detail: 'QEII High School' },
+      { date: '2026-04-26', type: 'match',     title: 'IOM vs Norway',           time: '11:00', detail: 'Home · National Ground' },
+      { date: '2026-04-29', type: 'committee', title: 'Selection Committee',     time: '18:00', detail: 'IOMCA Offices' },
+      // May 2026
+      { date: '2026-05-03', type: 'match',     title: 'IOM vs Denmark',          time: '11:00', detail: 'Away · Copenhagen' },
+      { date: '2026-05-07', type: 'school',    title: 'School Visit',            time: '09:30', detail: "St Ninian's High" },
+      { date: '2026-05-10', type: 'match',     title: 'Women vs Ireland',        time: '11:00', detail: 'Away · Dublin' },
+      { date: '2026-05-13', type: 'committee', title: 'AGM Preparation',         time: '18:30', detail: 'IOMCA Offices' },
+      { date: '2026-05-17', type: 'match',     title: 'IOM vs Germany',          time: '11:00', detail: 'Home · National Ground' },
+      { date: '2026-05-20', type: 'school',    title: 'School Visit',            time: '10:00', detail: 'Ramsey Grammar' },
+      { date: '2026-05-24', type: 'match',     title: 'IOM vs Finland',          time: '11:00', detail: 'Home · National Ground' },
+      { date: '2026-05-27', type: 'committee', title: 'Board Meeting',           time: '18:30', detail: 'IOMCA Offices' },
+      // June 2026
+      { date: '2026-06-06', type: 'match',     title: 'IOM vs Gibraltar',        time: '11:00', detail: 'Home · National Ground' },
+      { date: '2026-06-10', type: 'committee', title: 'Board Meeting',           time: '18:30', detail: 'IOMCA Offices' },
+      { date: '2026-06-14', type: 'school',    title: 'Schools Festival',        time: '09:00', detail: 'Multiple Schools · IOM' },
+      { date: '2026-06-15', type: 'match',     title: 'European Champs D1',      time: '09:00', detail: 'Away · TBC' },
+      { date: '2026-06-16', type: 'match',     title: 'European Champs D2',      time: '09:00', detail: 'Away · TBC' },
+      { date: '2026-06-17', type: 'match',     title: 'European Champs D3',      time: '09:00', detail: 'Away · TBC' },
+      { date: '2026-06-21', type: 'school',    title: 'School Visit',            time: '10:00', detail: "St Mary's Primary" },
+      { date: '2026-06-24', type: 'committee', title: 'Season Review',           time: '18:30', detail: 'IOMCA Offices' },
+    ];
+
+    var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var now = new Date();
+    var todayStr = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-' + pad(now.getDate());
+
+    var year = 2026, month = 3; // start: April 2026
+    var filter = 'all';
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function render() {
+      document.getElementById('cal-month-title').textContent = MONTHS[month] + ' ' + year;
+      var firstDow = (new Date(year, month, 1).getDay() + 6) % 7; // Mon=0
+      var daysInMonth = new Date(year, month + 1, 0).getDate();
+      var daysInPrev  = new Date(year, month, 0).getDate();
+      var total = Math.ceil((firstDow + daysInMonth) / 7) * 7;
+      var html = '';
+
+      for (var i = 0; i < total; i++) {
+        var dayNum, dateStr = '', cls = 'cal-day';
+        if (i < firstDow) {
+          dayNum = daysInPrev - firstDow + 1 + i;
+          cls += ' other-month';
+        } else if (i >= firstDow + daysInMonth) {
+          dayNum = i - firstDow - daysInMonth + 1;
+          cls += ' other-month';
+        } else {
+          dayNum = i - firstDow + 1;
+          dateStr = year + '-' + pad(month + 1) + '-' + pad(dayNum);
+          if (dateStr === todayStr) cls += ' today';
+        }
+
+        var evts = dateStr ? EVENTS.filter(function(e) { return e.date === dateStr; }) : [];
+        var evtHtml = evts.map(function(e) {
+          var hidden = (filter !== 'all' && filter !== e.type) ? ' hidden' : '';
+          return '<span class="cal-event ' + e.type + hidden + '" title="' + e.time + ' · ' + e.detail + '">' + e.title + '</span>';
+        }).join('');
+
+        html += '<div class="' + cls + '"><div class="cal-day-num">' + dayNum + '</div>' + evtHtml + '</div>';
+      }
+      document.getElementById('cal-days').innerHTML = html;
+    }
+
+    function setFilter(f) {
+      filter = f;
+      document.querySelectorAll('.cal-filter').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.filter === f);
+      });
+      render();
+    }
+
+    document.getElementById('cal-prev').addEventListener('click', function() {
+      month--; if (month < 0) { month = 11; year--; }
+      render();
+    });
+    document.getElementById('cal-next').addEventListener('click', function() {
+      month++; if (month > 11) { month = 0; year++; }
+      render();
+    });
+    document.querySelectorAll('.cal-filter').forEach(function(b) {
+      b.addEventListener('click', function() { setFilter(b.dataset.filter); });
+    });
+
+    render();
+  })();
 </script>
 </body>
 </html>
