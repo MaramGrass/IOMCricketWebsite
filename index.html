@@ -202,6 +202,41 @@
 </div>
 </div>
 
+<!-- CALENDAR -->
+<div style="background:var(--off-white);padding:80px 0;">
+<div class="section" style="padding-top:0;padding-bottom:0">
+<div class="section-header">
+<div class="section-label">What's On</div>
+<h2 class="section-title">Events <em>Calendar</em></h2>
+</div>
+<div class="cal-filters" id="cal-filters">
+<button type="button" class="cal-filter-btn active" data-filter="all">All Events</button>
+<button type="button" class="cal-filter-btn" data-filter="match">Matches</button>
+<button type="button" class="cal-filter-btn" data-filter="meeting">Committee Meetings</button>
+<button type="button" class="cal-filter-btn" data-filter="school">School Visits</button>
+</div>
+<div class="cal-wrapper">
+<div class="cal-main">
+<div class="cal-header">
+<button type="button" class="cal-nav" id="cal-prev" aria-label="Previous month">&#8249;</button>
+<div class="cal-month-year" id="cal-month-year"></div>
+<button type="button" class="cal-nav" id="cal-next" aria-label="Next month">&#8250;</button>
+</div>
+<div class="cal-day-headers">
+<div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
+</div>
+<div class="cal-grid-body" id="cal-grid-body"></div>
+</div>
+<div class="cal-events-panel">
+<div class="cal-events-header">
+<span class="cal-events-panel-title" id="cal-panel-title">Events This Month</span>
+</div>
+<div class="cal-events-list" id="cal-events-list"></div>
+</div>
+</div>
+</div>
+</div>
+
 <!-- CTA BANNER -->
 <div style="background:linear-gradient(135deg,rgba(150,10,20,0.85),rgba(80,0,10,0.9)),url('images/Stock 3 Stadium.jpg');background-size:cover;background-position:center;padding:64px 40px;text-align:center">
 <div style="max-width:600px;margin:0 auto">
@@ -262,9 +297,171 @@
 </footer>
 
 <script>
-  document.getElementById('hamburger').addEventListener('click', () =>{
+  document.getElementById('hamburger').addEventListener('click', () => {
     document.getElementById('nav-links').classList.toggle('open');
   });
+
+  // ── CALENDAR ──
+  const CAL_EVENTS = [
+    // April 2026 — Matches
+    { date:'2026-04-12', type:'match',   title:"Men's vs Jersey",              detail:'Home · Nobles Cricket Ground', time:'11:00' },
+    { date:'2026-04-19', type:'match',   title:"Women's vs Guernsey",          detail:'Away · Guernsey',              time:'11:00' },
+    { date:'2026-04-26', type:'match',   title:"Men's vs Scotland XI",         detail:'Home · Nobles Cricket Ground', time:'11:00' },
+    // April 2026 — Committee Meetings
+    { date:'2026-04-07', type:'meeting', title:'IOMCA Committee Meeting',       detail:'Nobles · Committee Room',      time:'18:30' },
+    { date:'2026-04-22', type:'meeting', title:'Selection Committee',           detail:'Nobles · Committee Room',      time:'19:00' },
+    // April 2026 — School Visits
+    { date:'2026-04-02', type:'school',  title:'Ballakermeen High School',      detail:'Cricket Taster Session',       time:'10:00' },
+    { date:'2026-04-09', type:'school',  title:"St Ninian's High School",       detail:'Junior Cricket Workshop',      time:'09:30' },
+    { date:'2026-04-15', type:'school',  title:'Queen Elizabeth II High School',detail:'Cricket Taster Session',       time:'10:30' },
+    { date:'2026-04-23', type:'school',  title:'Ramsey Grammar School',         detail:'Junior Cricket Workshop',      time:'10:00' },
+    { date:'2026-04-29', type:'school',  title:'Peel Clothworkers School',      detail:'Cricket Taster Session',       time:'09:30' },
+    // May 2026 — Matches
+    { date:'2026-05-03', type:'match',   title:'Academy vs Lancashire Academy', detail:'Away · Manchester',            time:'11:00' },
+    { date:'2026-05-10', type:'match',   title:"Men's vs Ireland Wolves",       detail:'Home · Nobles Cricket Ground', time:'11:00' },
+    { date:'2026-05-17', type:'match',   title:"Women's vs Scotland Women",     detail:'Home · Nobles Cricket Ground', time:'11:00' },
+    { date:'2026-05-24', type:'match',   title:"Men's vs Netherlands",          detail:'Away · The Netherlands',       time:'11:00' },
+    // May 2026 — Committee Meetings
+    { date:'2026-05-05', type:'meeting', title:'IOMCA Committee Meeting',       detail:'Nobles · Committee Room',      time:'18:30' },
+    { date:'2026-05-20', type:'meeting', title:'Cricket Development Meeting',   detail:'Nobles · Committee Room',      time:'19:00' },
+    // May 2026 — School Visits
+    { date:'2026-05-07', type:'school',  title:'Ballabeg School',               detail:'Cricket Taster Session',       time:'10:00' },
+    { date:'2026-05-14', type:'school',  title:'Andreas School',                detail:'Junior Cricket Workshop',      time:'10:00' },
+    { date:'2026-05-21', type:'school',  title:'Onchan School',                 detail:'Cricket Taster Session',       time:'10:30' },
+    // June 2026 — Matches
+    { date:'2026-06-06', type:'match',   title:"Men's vs Jersey",               detail:'Away · Jersey',                time:'11:00' },
+    { date:'2026-06-13', type:'match',   title:"Women's ICC T20 WC Qualifier",  detail:'Away · TBC',                   time:'11:00' },
+    { date:'2026-06-20', type:'match',   title:"Men's vs Guernsey",             detail:'Home · Nobles Cricket Ground', time:'11:00' },
+    // June 2026 — Committee Meetings
+    { date:'2026-06-02', type:'meeting', title:'IOMCA Committee Meeting',       detail:'Nobles · Committee Room',      time:'18:30' },
+    { date:'2026-06-17', type:'meeting', title:'AGM Preparation Meeting',       detail:'Nobles · Committee Room',      time:'18:30' },
+    // June 2026 — School Visits
+    { date:'2026-06-04', type:'school',  title:'Arbory School',                 detail:'Cricket Taster Session',       time:'10:00' },
+    { date:'2026-06-11', type:'school',  title:'Laxey School',                  detail:'Junior Cricket Festival',      time:'10:00' },
+  ];
+
+  const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DAY_ABBR    = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const MONTH_ABBR  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const BADGE_LABEL = { match:'Match', meeting:'Committee', school:'Schools' };
+
+  let calYear   = 2026;
+  let calMonth  = 3; // 0-indexed → April
+  let activeFilter = 'all';
+
+  function filteredEvents() {
+    return activeFilter === 'all' ? CAL_EVENTS : CAL_EVENTS.filter(e => e.type === activeFilter);
+  }
+
+  function renderCalendar() {
+    const monthStr = MONTH_NAMES[calMonth] + ' ' + calYear;
+    document.getElementById('cal-month-year').textContent = monthStr;
+    document.getElementById('cal-panel-title').textContent = 'Events — ' + MONTH_NAMES[calMonth];
+
+    const today = new Date();
+    const firstDayOfWeek = new Date(calYear, calMonth, 1).getDay(); // Sun=0
+    const startOffset = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1; // Mon-first
+    const daysInMonth  = new Date(calYear, calMonth + 1, 0).getDate();
+
+    const evts = filteredEvents();
+    const grid = document.getElementById('cal-grid-body');
+    let html = '';
+
+    // Leading empty cells
+    for (let i = 0; i < startOffset; i++) {
+      html += '<div class="cal-cell cal-cell-empty"></div>';
+    }
+
+    // Day cells
+    for (let d = 1; d <= daysInMonth; d++) {
+      const mm   = String(calMonth + 1).padStart(2, '0');
+      const dd   = String(d).padStart(2, '0');
+      const key  = calYear + '-' + mm + '-' + dd;
+      const dayEvts = evts.filter(e => e.date === key);
+      const isToday  = today.getFullYear() === calYear && today.getMonth() === calMonth && today.getDate() === d;
+
+      let dotsHtml = '';
+      dayEvts.slice(0, 3).forEach(e => {
+        dotsHtml += '<span class="cal-dot cal-dot-' + e.type + '"></span>';
+      });
+      if (dayEvts.length > 3) {
+        dotsHtml += '<span class="cal-dot-more">+' + (dayEvts.length - 3) + '</span>';
+      }
+
+      html += '<div class="cal-cell' + (isToday ? ' cal-cell-today' : '') + '">';
+      html += '<span class="cal-cell-date">' + d + '</span>';
+      if (dotsHtml) html += '<div class="cal-dots">' + dotsHtml + '</div>';
+      html += '</div>';
+    }
+
+    // Trailing empty cells to complete grid row
+    const totalCells  = startOffset + daysInMonth;
+    const trailingCells = (7 - (totalCells % 7)) % 7;
+    for (let i = 0; i < trailingCells; i++) {
+      html += '<div class="cal-cell cal-cell-empty"></div>';
+    }
+
+    grid.innerHTML = html;
+    renderEventsList();
+  }
+
+  function renderEventsList() {
+    const mm = String(calMonth + 1).padStart(2, '0');
+    const monthPrefix = calYear + '-' + mm;
+    const evts = filteredEvents()
+      .filter(e => e.date.startsWith(monthPrefix))
+      .sort((a, b) => a.date.localeCompare(b.date));
+
+    const list = document.getElementById('cal-events-list');
+    if (evts.length === 0) {
+      list.innerHTML = '<div class="cal-no-events">No events this month for the selected filter.</div>';
+      return;
+    }
+
+    list.innerHTML = evts.map(function(e) {
+      const d       = new Date(e.date + 'T00:00:00');
+      const dayName = DAY_ABBR[d.getDay()];
+      const dayNum  = d.getDate();
+      const monAbbr = MONTH_ABBR[d.getMonth()];
+      return '<div class="cal-event-item">'
+        + '<div class="cal-event-date-col">'
+        +   '<span class="cal-event-day-name">' + dayName + '</span>'
+        +   '<span class="cal-event-day-num">'  + dayNum  + '</span>'
+        +   '<span class="cal-event-month-abbr">' + monAbbr + '</span>'
+        + '</div>'
+        + '<div class="cal-event-info">'
+        +   '<span class="cal-event-badge cal-event-badge-' + e.type + '">' + BADGE_LABEL[e.type] + '</span>'
+        +   '<div class="cal-event-title">'  + e.title  + '</div>'
+        +   '<div class="cal-event-detail">' + e.time + ' · ' + e.detail + '</div>'
+        + '</div>'
+        + '</div>';
+    }).join('');
+  }
+
+  // Filter buttons
+  document.getElementById('cal-filters').addEventListener('click', function(ev) {
+    const btn = ev.target.closest('.cal-filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('.cal-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    renderCalendar();
+  });
+
+  // Month navigation
+  document.getElementById('cal-prev').addEventListener('click', function() {
+    calMonth--;
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    renderCalendar();
+  });
+
+  document.getElementById('cal-next').addEventListener('click', function() {
+    calMonth++;
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    renderCalendar();
+  });
+
+  renderCalendar();
 </script>
 </body>
 </html>
