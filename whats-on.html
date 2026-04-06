@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's On &amp; Book — Isle of Man Cricket</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .wo-section { padding: 72px 0; }
+  .wo-section + .wo-section { border-top: 1px solid var(--light-grey); }
+  .wo-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  .wo-alt { background: var(--white); }
+
+  /* Event card */
+  .event-list { display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+  .event-card {
+    display: flex; align-items: flex-start; gap: 24px;
+    background: var(--white); border: 1px solid var(--light-grey);
+    border-radius: 12px; padding: 20px 24px;
+    transition: box-shadow 0.15s;
+  }
+  .wo-alt .event-card { background: var(--off-white); }
+  .event-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  .event-date-badge {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-width: 60px; background: var(--off-white);
+    border-radius: 10px; padding: 10px 8px; text-align: center; flex-shrink: 0;
+  }
+  .wo-alt .event-date-badge { background: var(--white); }
+  .event-date-badge .day { font-size: 24px; font-weight: 700; line-height: 1; color: var(--dark); }
+  .event-date-badge .month { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-grey); margin-top: 2px; }
+  .event-date-badge .year { font-size: 10px; color: var(--mid-grey); margin-top: 1px; }
+  .event-body { flex: 1; }
+  .event-tag {
+    display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; padding: 3px 8px; border-radius: 4px; margin-bottom: 6px;
+  }
+  .tag-match { background: #fef3f4; color: var(--red); }
+  .tag-programme { background: #f0f7f3; color: var(--cricket-green); }
+  .tag-camp { background: #fff8f0; color: #c87000; }
+  .tag-coaching { background: #f4f0ff; color: #5b3ea6; }
+  .event-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .event-detail { font-size: 13.5px; color: #666; line-height: 1.6; }
+  .event-book {
+    margin-top: 10px;
+    font-size: 13px; font-weight: 600; color: var(--cricket-green);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
+  }
+  .event-book:hover { color: var(--cricket-green-light); }
+
+  /* No-date card (one-to-ones) */
+  .no-date-card {
+    background: var(--white); border: 1px solid var(--light-grey);
+    border-radius: 12px; padding: 28px 32px;
+  }
+  .no-date-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .no-date-card p { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 16px; }
+
+  /* Section header inline variant */
+  .wo-section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--cricket-green); margin-bottom: 6px; }
+  .wo-section-title { font-family: 'Bebas Neue', sans-serif; font-size: 40px; font-weight: 900; color: var(--dark); margin-bottom: 0; }
+  .wo-section-title em { font-style: normal; color: var(--red); }
+  .wo-section-desc { font-size: 15px; color: #666; line-height: 1.8; margin-top: 10px; max-width: 680px; }
+
+  @media (max-width: 600px) {
+    .wo-inner { padding: 0 20px; }
+    .event-card { flex-direction: column; gap: 12px; }
+    .event-date-badge { flex-direction: row; gap: 8px; align-items: baseline; min-width: unset; }
+    .event-date-badge .day { font-size: 18px; }
+    .wo-section-title { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+<a href="index.html" class="nav-logo">
+<img src="images/logo.png" alt="Isle of Man Cricket Association">
+<div class="nav-logo-text">
+<span class="org">Isle of Man</span>
+<span class="country">Cricket Association</span>
+</div>
+</a>
+<ul class="nav-links" id="nav-links">
+<li><a href="index.html">Home</a></li>
+<li>
+<span>Domestic Cricket<span class="nav-caret">▾</span></span>
+<ul class="nav-dropdown">
+<li><a href="domestic.html#clubs">Find a Club</a></li>
+<li><a href="get-involved.html#coaching">Coaching</a></li>
+<li><a href="get-involved.html#umpiring">Umpiring</a></li>
+</ul>
+</li>
+<li>
+<span>Performance Cricket<span class="nav-caret">▾</span></span>
+<ul class="nav-dropdown">
+<li><a href="mens-team.html">Men's National Team</a></li>
+<li><a href="womens-team.html">Women's National Team</a></li>
+<li><a href="academy.html">Academy &amp; EPP</a></li>
+<li><a href="roll-of-honour.html">Roll of Honour</a></li>
+</ul>
+</li>
+<li>
+<span>Community Activity<span class="nav-caret">▾</span></span>
+<ul class="nav-dropdown">
+<li><a href="community.html#schools">Schools</a></li>
+<li><a href="community.html#future-red-caps">Future Red Caps</a></li>
+<li><a href="community.html#cricstart">Cric Start</a></li>
+<li><a href="community.html#camps">Summer Camps</a></li>
+</ul>
+</li>
+<li>
+<span>About<span class="nav-caret">▾</span></span>
+<ul class="nav-dropdown">
+<li><a href="about.html">About IOMCA</a></li>
+<li><a href="about.html#committees">Committees</a></li>
+<li><a href="about.html#policies">Welfare &amp; Policies</a></li>
+<li><a href="partners.html">Partners</a></li>
+<li><a href="contact.html">Contact Us</a></li>
+</ul>
+</li>
+<li><a href="news.html">News</a></li>
+<li><a href="whats-on.html" class="nav-whats-on-btn active">What's On &amp; Book</a></li>
+<li><a href="https://booking.iomcricket.co.uk/" class="nav-store-btn" target="_blank">Book Indoor Centre</a></li>
+</ul>
+<div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero" style="background-image:url('images/Junior IOM Cricket.jpg')">
+<div class="page-hero-content">
+<div class="page-hero-label">What's On</div>
+<h1>Events, Sessions &amp; <em>Booking</em></h1>
+<p>Fixtures, programmes and activities happening across Isle of Man Cricket — find what's on and book your place.</p>
+</div>
+</div>
+
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span>What's On &amp; Book</div>
+
+<!-- QUICK NAV -->
+<div style="background:var(--white);border-bottom:1px solid var(--light-grey);padding:14px 40px">
+<div style="max-width:1200px;margin:0 auto;display:flex;gap:24px;flex-wrap:wrap">
+<a href="#fixtures" style="font-size:13px;font-weight:600;color:var(--dark);text-decoration:none;opacity:0.7">Upcoming Fixtures</a>
+<a href="#future-red-caps" style="font-size:13px;font-weight:600;color:var(--dark);text-decoration:none;opacity:0.7">Future Red Caps</a>
+<a href="#one-to-ones" style="font-size:13px;font-weight:600;color:var(--dark);text-decoration:none;opacity:0.7">One-to-One Coaching</a>
+<a href="#holiday-programmes" style="font-size:13px;font-weight:600;color:var(--dark);text-decoration:none;opacity:0.7">Holiday Programmes</a>
+<a href="#crickids" style="font-size:13px;font-weight:600;color:var(--dark);text-decoration:none;opacity:0.7">CricKids</a>
+</div>
+</div>
+
+<!-- UPCOMING FIXTURES -->
+<div class="wo-section" id="fixtures">
+<div class="wo-inner">
+<div class="wo-section-label">Fixtures</div>
+<h2 class="wo-section-title">Upcoming <em>Fixtures</em></h2>
+<p class="wo-section-desc">Men's, Women's and Academy matches coming up this season. All home matches are played at Nobles Cricket Ground, Douglas.</p>
+
+<div class="event-list">
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">12</span><span class="month">Apr</span><span class="year">2026</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-match">Match</span>
+      <div class="event-title">Men's vs Jersey</div>
+      <div class="event-detail">Home · Nobles Cricket Ground, Douglas · 11:00</div>
+      <div class="event-detail" style="margin-top:4px">Free entry for spectators. Come and support the Red Caps in their first home fixture of the 2026 season.</div>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">19</span><span class="month">Apr</span><span class="year">2026</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-match">Match</span>
+      <div class="event-title">Women's vs Guernsey</div>
+      <div class="event-detail">Away · Guernsey · 11:00</div>
+      <div class="event-detail" style="margin-top:4px">The Women's team travel to Guernsey for an early season fixture against strong regional opposition.</div>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">26</span><span class="month">Apr</span><span class="year">2026</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-match">Match</span>
+      <div class="event-title">Men's vs Scotland XI</div>
+      <div class="event-detail">Home · Nobles Cricket Ground, Douglas · 11:00</div>
+      <div class="event-detail" style="margin-top:4px">A high-profile home fixture against a Scotland development XI — excellent cricket guaranteed.</div>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">3</span><span class="month">May</span><span class="year">2026</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-match">Match</span>
+      <div class="event-title">Academy vs Lancashire Academy</div>
+      <div class="event-detail">Away · Manchester · 11:00</div>
+      <div class="event-detail" style="margin-top:4px">The IOMCA Academy travel to face Lancashire Academy — a great development opportunity for the Island's brightest young talents.</div>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">10</span><span class="month">May</span><span class="year">2026</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-match">Match</span>
+      <div class="event-title">Men's vs Ireland Wolves</div>
+      <div class="event-detail">Home · Nobles Cricket Ground, Douglas · 11:00</div>
+      <div class="event-detail" style="margin-top:4px">One of the highlights of the home schedule — the Men's team host the Ireland Wolves at Nobles.</div>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">17</span><span class="month">May</span><span class="year">2026</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-match">Match</span>
+      <div class="event-title">Women's vs Scotland Women</div>
+      <div class="event-detail">Home · Nobles Cricket Ground, Douglas · 11:00</div>
+      <div class="event-detail" style="margin-top:4px">Come and support the Women's team at Nobles as they take on Scotland Women in a key fixture.</div>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">6</span><span class="month">Jun</span><span class="year">2026</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-match">Match</span>
+      <div class="event-title">Men's vs Jersey</div>
+      <div class="event-detail">Away · Jersey · 11:00</div>
+      <div class="event-detail" style="margin-top:4px">The Men's team travel to Jersey for the return fixture in an important inter-island rivalry.</div>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">20</span><span class="month">Jun</span><span class="year">2026</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-match">Match</span>
+      <div class="event-title">Men's vs Guernsey</div>
+      <div class="event-detail">Home · Nobles Cricket Ground, Douglas · 11:00</div>
+      <div class="event-detail" style="margin-top:4px">The second home inter-island fixture of the summer — always a passionate crowd at Nobles.</div>
+    </div>
+  </div>
+
+</div>
+
+<p style="margin-top:24px;font-size:13.5px;color:#888">All fixtures are subject to change. Follow us on social media for the latest updates.</p>
+</div>
+</div>
+
+<!-- FUTURE RED CAPS -->
+<div class="wo-section wo-alt" id="future-red-caps">
+<div class="wo-inner">
+<div class="wo-section-label">Junior Development</div>
+<h2 class="wo-section-title">Future <em>Red Caps</em></h2>
+<p class="wo-section-desc">Structured coaching sessions for young players aged U11 and above who aspire to represent the Isle of Man. High standards, safe environment, and real development — on the pathway to wearing the Red Cap.</p>
+
+<div class="event-list">
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">19</span><span class="month">Apr</span><span class="year">2026</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-programme">Programme</span>
+      <div class="event-title">Future Red Caps — Years 4–6 Session</div>
+      <div class="event-detail">Nobles Cricket Ground · 10:00–12:00</div>
+      <div class="event-detail" style="margin-top:4px">First introduction to IOMCA coaching for younger juniors. Focus on batting and fielding fundamentals in a fun, structured environment.</div>
+      <a href="mailto:iomca@iomca.im" class="event-book">Book your place → iomca@iomca.im</a>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">26</span><span class="month">Apr</span><span class="year">2026</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-programme">Programme</span>
+      <div class="event-title">Future Red Caps — Years 7–9 Session</div>
+      <div class="event-detail">Nobles Cricket Ground · 10:00–12:30</div>
+      <div class="event-detail" style="margin-top:4px">Intermediate coaching covering batting, bowling and fielding with tactical awareness and match scenarios.</div>
+      <a href="mailto:iomca@iomca.im" class="event-book">Book your place → iomca@iomca.im</a>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">3</span><span class="month">May</span><span class="year">2026</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-programme">Programme</span>
+      <div class="event-title">Future Red Caps — Girls Only (Yrs 7–11)</div>
+      <div class="event-detail">Nobles Cricket Ground · 10:00–12:00</div>
+      <div class="event-detail" style="margin-top:4px">Dedicated girls-only session — all abilities welcome. Includes hardball cricket introduction for those ready to make the transition.</div>
+      <a href="mailto:iomca@iomca.im" class="event-book">Book your place → iomca@iomca.im</a>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">17</span><span class="month">May</span><span class="year">2026</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-programme">Programme</span>
+      <div class="event-title">Future Red Caps — Years 10–12 Session</div>
+      <div class="event-detail">Nobles Cricket Ground · 09:30–12:30</div>
+      <div class="event-detail" style="margin-top:4px">Advanced development for players on the national team pathway. High-intensity coaching from IOMCA-qualified coaches.</div>
+      <a href="mailto:iomca@iomca.im" class="event-book">Book your place → iomca@iomca.im</a>
+    </div>
+  </div>
+
+</div>
+
+<p style="margin-top:20px;font-size:13.5px;color:#888">For all Future Red Caps enquiries contact <strong>Sally Green</strong>, IOMCA Community Coach: <a href="mailto:iomca@iomca.im" style="color:var(--cricket-green)">iomca@iomca.im</a></p>
+</div>
+</div>
+
+<!-- ONE-TO-ONES -->
+<div class="wo-section" id="one-to-ones">
+<div class="wo-inner">
+<div class="wo-section-label">Personal Coaching</div>
+<h2 class="wo-section-title">One-to-One <em>Coaching</em></h2>
+<p class="wo-section-desc">Personalised coaching sessions available year-round — tailored specifically to your game and goals, whether you're a junior looking to develop or a senior player wanting to sharpen a specific skill.</p>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px">
+  <div class="no-date-card">
+    <h3>Individual Sessions</h3>
+    <p>One-to-one coaching with an IOMCA-qualified coach focusing on batting, bowling or fielding. Sessions can be booked at our Indoor Cricket Centre or at a suitable outdoor venue. Duration: 45–60 minutes. Available year-round.</p>
+    <a href="mailto:iomca@iomca.im" class="event-book">Enquire & Book → iomca@iomca.im</a>
+  </div>
+  <div class="no-date-card">
+    <h3>Pair / Small Group Sessions</h3>
+    <p>Cost-effective sessions for two or three players working together — great for school friends or club teammates. Coaching is personalised to each individual within the group. Duration: 60–90 minutes. Available year-round.</p>
+    <a href="mailto:iomca@iomca.im" class="event-book">Enquire & Book → iomca@iomca.im</a>
+  </div>
+</div>
+
+<div style="margin-top:20px;padding:20px 24px;background:var(--off-white);border-radius:12px;border:1px solid var(--light-grey)">
+  <strong style="font-size:14px">How to book:</strong>
+  <span style="font-size:14px;color:#555"> Email <a href="mailto:iomca@iomca.im" style="color:var(--cricket-green)">iomca@iomca.im</a> or call the IOMCA to discuss availability, pricing and coach allocation. Sessions are subject to coach availability.</span>
+</div>
+</div>
+</div>
+
+<!-- HOLIDAY PROGRAMMES -->
+<div class="wo-section wo-alt" id="holiday-programmes">
+<div class="wo-inner">
+<div class="wo-section-label">Holidays &amp; Camps</div>
+<h2 class="wo-section-title">Holiday <em>Programmes</em></h2>
+<p class="wo-section-desc">Summer cricket camps at Cronkbourne Cricket Club — a fantastic way to spend the school holidays. Skill development, fun cricket and great memories. Available across age groups with dedicated girls-only sessions.</p>
+
+<div class="event-list">
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">23</span><span class="month">Jul</span><span class="year">2025</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-camp">Summer Camp</span>
+      <div class="event-title">Summer Cricket Camp — Soft Ball &amp; U11</div>
+      <div class="event-detail">Cronkbourne Cricket Club · 09:30–15:00</div>
+      <div class="event-detail" style="margin-top:4px">Fun introductory camp for younger players and beginners. Soft ball sessions, games and activities designed to make cricket enjoyable and accessible.</div>
+      <div class="event-detail" style="margin-top:6px;font-weight:600">£12–£18 · Book early — places are limited</div>
+      <a href="mailto:iomca@iomca.im" class="event-book">Book → iomca@iomca.im</a>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">29</span><span class="month">Jul</span><span class="year">2025</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-camp">Summer Camp</span>
+      <div class="event-title">Summer Cricket Camp — U13 &amp; U15</div>
+      <div class="event-detail">Cronkbourne Cricket Club · 09:30–15:30</div>
+      <div class="event-detail" style="margin-top:4px">Skill-focused camp for older juniors covering all facets of the game. Includes match play, drills and technical coaching from qualified IOMCA coaches.</div>
+      <div class="event-detail" style="margin-top:6px;font-weight:600">£20–£25 · Book early — places are limited</div>
+      <a href="mailto:iomca@iomca.im" class="event-book">Book → iomca@iomca.im</a>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">5</span><span class="month">Aug</span><span class="year">2025</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-camp">Summer Camp</span>
+      <div class="event-title">Summer Cricket Camp — Female Only</div>
+      <div class="event-detail">Cronkbourne Cricket Club · 09:30–15:00</div>
+      <div class="event-detail" style="margin-top:4px">A dedicated girls-only camp in a welcoming, supportive environment. All abilities welcome — from complete beginners to those already playing club cricket.</div>
+      <div class="event-detail" style="margin-top:6px;font-weight:600">£15–£20 · Book early — places are limited</div>
+      <a href="mailto:iomca@iomca.im" class="event-book">Book → iomca@iomca.im</a>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">27</span><span class="month">Aug</span><span class="year">2025</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-camp">Summer Camp</span>
+      <div class="event-title">Summer Cricket Camp — All Ages</div>
+      <div class="event-detail">Cronkbourne Cricket Club · 09:30–15:30</div>
+      <div class="event-detail" style="margin-top:4px">End-of-summer camp with mixed age group activities. A fantastic send-off to the cricket season with fun games, competitions and presentations.</div>
+      <div class="event-detail" style="margin-top:6px;font-weight:600">£12–£25 · Book early — places are limited</div>
+      <a href="mailto:iomca@iomca.im" class="event-book">Book → iomca@iomca.im</a>
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<!-- CRICKIDS -->
+<div class="wo-section" id="crickids">
+<div class="wo-inner">
+<div class="wo-section-label">Ages 3–9</div>
+<h2 class="wo-section-title">Cric<em>Kids</em> Sessions</h2>
+<p class="wo-section-desc">Regular CricKids sessions running at clubs across the Island — a perfect first introduction to cricket for children aged 3 to 9. Fun, non-competitive, and designed to build confidence alongside basic cricket skills.</p>
+
+<div class="event-list">
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">Every</span><span class="month" style="font-size:10px">Sat AM</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-programme">CricKids</span>
+      <div class="event-title">CricKids at Cronkbourne CC — Ages 3–6</div>
+      <div class="event-detail">Cronkbourne Cricket Club · Saturdays · 09:00–10:00</div>
+      <div class="event-detail" style="margin-top:4px">Fun cricket activities for very young children — developing athletic ability, social skills and the basics of the game through games and play.</div>
+      <a href="mailto:iomca@iomca.im" class="event-book">Book a place → iomca@iomca.im</a>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">Every</span><span class="month" style="font-size:10px">Sat AM</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-programme">CricSoft</span>
+      <div class="event-title">CricSoft at Finch Hill CC — Ages 7–9</div>
+      <div class="event-detail">Finch Hill Cricket Club · Saturdays · 10:00–11:00</div>
+      <div class="event-detail" style="margin-top:4px">Modified soft ball cricket where every child gets equal turns batting, bowling and fielding. High-energy, high-enjoyment — the ideal bridge into hard ball club cricket.</div>
+      <a href="mailto:iomca@iomca.im" class="event-book">Book a place → iomca@iomca.im</a>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">Every</span><span class="month" style="font-size:10px">Sun AM</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-programme">CricKids</span>
+      <div class="event-title">CricKids at Ramsey CC — Ages 3–6</div>
+      <div class="event-detail">Ramsey Cricket Club · Sundays · 09:30–10:30</div>
+      <div class="event-detail" style="margin-top:4px">North Island CricKids sessions at Ramsey CC. Great for families in the north of the Island looking for a fun weekend activity for young children.</div>
+      <a href="mailto:iomca@iomca.im" class="event-book">Book a place → iomca@iomca.im</a>
+    </div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-date-badge"><span class="day">Every</span><span class="month" style="font-size:10px">Sat AM</span></div>
+    <div class="event-body">
+      <span class="event-tag tag-programme">CricGirls</span>
+      <div class="event-title">CricGirls at Crosby CC — Ages 8–11</div>
+      <div class="event-detail">Crosby Cricket Club · Saturdays · 10:00–11:00</div>
+      <div class="event-detail" style="margin-top:4px">Dedicated girls-only cricket sessions in a welcoming, inclusive environment. Launched in 2024 — all abilities welcome, no experience necessary.</div>
+      <a href="mailto:iomca@iomca.im" class="event-book">Book a place → iomca@iomca.im</a>
+    </div>
+  </div>
+
+</div>
+
+<div style="margin-top:24px;padding:20px 24px;background:var(--off-white);border-radius:12px;border:1px solid var(--light-grey)">
+  <strong style="font-size:14px">How to register:</strong>
+  <span style="font-size:14px;color:#555"> Email <a href="mailto:iomca@iomca.im" style="color:var(--cricket-green)">iomca@iomca.im</a> with your child's name, age and preferred venue. Sessions run throughout the season — come and try a free taster session first.</span>
+</div>
+</div>
+</div>
+
+<!-- INDOOR CENTRE CTA -->
+<div style="background:linear-gradient(135deg,var(--cricket-green),#0e3d22);padding:64px 40px;text-align:center">
+<div style="max-width:640px;margin:0 auto">
+<div class="wo-section-label" style="color:rgba(255,255,255,0.6)">Indoor Cricket</div>
+<h2 style="font-family:'Bebas Neue',sans-serif;font-size:40px;font-weight:900;color:var(--white);margin:8px 0 16px">Book the Indoor Cricket Centre</h2>
+<p style="color:rgba(255,255,255,0.8);font-size:16px;margin-bottom:12px;line-height:1.8">Train all year round at the IOMCA's state-of-the-art indoor facility in Douglas. Four high-quality cricket lanes available for individual or group hire — with or without a bowling machine.</p>
+<p style="color:rgba(255,255,255,0.65);font-size:14px;margin-bottom:28px">Ideal for pre-season preparation, batting practice, coaching sessions and club training nights.</p>
+<a href="https://booking.iomcricket.co.uk/" class="btn-primary" target="_blank" style="background:var(--white);color:var(--cricket-green)">Book Online Now</a>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+<div class="footer-inner">
+<div class="footer-brand">
+<img src="images/logo.png" alt="Isle of Man Cricket Association">
+<p>The Isle of Man Cricket Association is the governing body for cricket on the Isle of Man, affiliated with the ICC and Cricket Europe.</p>
+<div class="footer-socials" style="margin-top:16px">
+<a href="#" title="Facebook">f</a>
+<a href="#" title="Twitter">𝕏</a>
+<a href="#" title="Instagram">◎</a>
+</div>
+</div>
+<div class="footer-col">
+<h4>Quick Links</h4>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="news.html">News</a></li>
+<li><a href="whats-on.html">What's On</a></li>
+<li><a href="mens-team.html">Men's Team</a></li>
+<li><a href="domestic.html">Domestic Cricket</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>What's On</h4>
+<ul>
+<li><a href="whats-on.html#fixtures">Fixtures</a></li>
+<li><a href="whats-on.html#future-red-caps">Future Red Caps</a></li>
+<li><a href="whats-on.html#one-to-ones">One-to-One Coaching</a></li>
+<li><a href="whats-on.html#holiday-programmes">Holiday Programmes</a></li>
+<li><a href="whats-on.html#crickids">CricKids</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Policies</h4>
+<ul>
+<li><a href="about.html#policies">Welfare &amp; Policies</a></li>
+<li><a href="about.html#privacy">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Isle of Man Cricket Association. All rights reserved.</span>
+<span>Member of ICC &amp; Cricket Europe</span>
+</div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('nav-links').classList.toggle('open');
+  });
+</script>
+</body>
+</html>

@@ -8,6 +8,8 @@
   --dark: #1a1a1a;
   --green: #1a1a1a;
   --green-light: #2d2d2d;
+  --cricket-green: #1b6b3a;
+  --cricket-green-light: #22834a;
   --red: #c41e2e;
   --red-light: #e02035;
   --gold: #c41e2e;
@@ -176,6 +178,23 @@ nav {
 }
 
 .nav-store-btn:hover { background: var(--red-light) !important; }
+
+.nav-whats-on-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  background: var(--cricket-green);
+  color: var(--white) !important;
+  border-radius: 6px;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  text-decoration: none;
+  transition: background 0.15s !important;
+  margin-left: 8px;
+}
+
+.nav-whats-on-btn:hover { background: var(--cricket-green-light) !important; }
 
 /* Hamburger */
 .hamburger {
