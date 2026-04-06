@@ -8,6 +8,8 @@
   --dark: #1a1a1a;
   --green: #1a1a1a;
   --green-light: #2d2d2d;
+  --cricket-green: #1b6b3a;
+  --cricket-green-light: #22834a;
   --red: #c41e2e;
   --red-light: #e02035;
   --gold: #c41e2e;
@@ -177,6 +179,23 @@ nav {
 
 .nav-store-btn:hover { background: var(--red-light) !important; }
 
+.nav-whats-on-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  background: var(--cricket-green);
+  color: var(--white) !important;
+  border-radius: 6px;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  text-decoration: none;
+  transition: background 0.15s !important;
+  margin-left: 8px;
+}
+
+.nav-whats-on-btn:hover { background: var(--cricket-green-light) !important; }
+
 /* Hamburger */
 .hamburger {
   display: none;
@@ -198,7 +217,7 @@ nav {
 
 /* ── HERO ── */
 .hero {
-  min-height: 100vh;
+  min-height: 72vh;
   padding-top: var(--nav-height);
   position: relative;
   overflow: hidden;
@@ -227,7 +246,7 @@ nav {
   z-index: 2;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 48px 40px;
+  padding: 32px 40px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
@@ -236,7 +255,7 @@ nav {
 
 .hero-text h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(36px, 5vw, 68px);
+  font-size: clamp(32px, 4vw, 56px);
   font-weight: 900;
   color: var(--white);
   line-height: 1.0;
